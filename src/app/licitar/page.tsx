@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Landing } from "@/components/Landing";
-import { LicitarGuide } from "@/components/LicitarGuide";
 import { GUIDES } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -14,9 +13,7 @@ export default function LicitarLandingPage() {
   return (
     <>
       <SiteHeader />
-      <Landing guide={GUIDES.licitar}>
-        <LicitarGuide />
-      </Landing>
+      <Landing guide={GUIDES.licitar} />
     </>
   );
 }

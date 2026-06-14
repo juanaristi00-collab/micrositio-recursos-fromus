@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Landing } from "@/components/Landing";
-import { RupGuide } from "@/components/RupGuide";
 import { GUIDES } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -14,9 +13,7 @@ export default function RupLandingPage() {
   return (
     <>
       <SiteHeader />
-      <Landing guide={GUIDES.rup}>
-        <RupGuide />
-      </Landing>
+      <Landing guide={GUIDES.rup} />
     </>
   );
 }

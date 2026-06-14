@@ -3,7 +3,11 @@ import { getServiceSupabase } from "@/lib/supabase";
 import { sendEmail } from "@/lib/resend";
 import { buildDeliveryEmail } from "@/lib/emails";
 import { GUIDES, isSource } from "@/lib/content";
-import { unsubscribeUrl } from "@/lib/tokens";
+import {
+  unsubscribeUrl,
+  guideUnlockUrl,
+  makeUnlockToken,
+} from "@/lib/tokens";
 import { rateLimit, pruneRateLimit } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -70,6 +74,13 @@ export async function POST(req: NextRequest) {
 
   const guide = GUIDES[source];
 
+  // Ruta de desbloqueo (relativa) que el cliente usará para abrir la guía con
+  // token firmado. Se devuelve siempre que la validación pasó.
+  const unlockToken = makeUnlockToken(email, source);
+  const unlockPath = `/${guide.slug}/guia?e=${encodeURIComponent(
+    email,
+  )}&t=${unlockToken}`;
+
   // 3. Upsert del lead (no duplicar por email+source). Si Supabase no está
   //    configurado, no rompemos la experiencia: revelamos la guía igual.
   let leadSaved = false;
@@ -101,7 +112,7 @@ export async function POST(req: NextRequest) {
   try {
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ?? new URL(req.url).origin;
-    const guideUrl = `${siteUrl}/${guide.slug}/guia`;
+    const guideUrl = guideUnlockUrl(siteUrl, guide.slug, email, source);
     const unsubUrl = unsubscribeUrl(siteUrl, email, source);
     const { subject, html, text } = buildDeliveryEmail(source, {
       guideUrl,
@@ -117,6 +128,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // La guía se revela siempre que la validación pasó (gratificación inmediata).
-  return NextResponse.json({ ok: true, leadSaved, emailSent });
+  // La guía se desbloquea siempre que la validación pasó: el cliente redirige
+  // a unlockPath, donde el servidor verifica el token y renderiza la guía.
+  return NextResponse.json({ ok: true, leadSaved, emailSent, unlockPath });
 }
