@@ -31,6 +31,7 @@ Guarda cada lead en Supabase y dispara un correo de entrega con Resend.
 /licitar/guia      Guía completa para licitar
 /privacidad        Política de tratamiento de datos (Ley 1581/2012)
 /gracias           Confirmación opcional
+/admin             Panel privado: lista de leads, conteo y descarga CSV
 /api/lead          POST: valida, upsert del lead, dispara el correo
 /api/unsubscribe   GET: baja firmada (marca unsubscribed = true)
 ```
@@ -71,7 +72,8 @@ Todas están documentadas en [`.env.example`](./.env.example):
 | `SUPABASE_SERVICE_ROLE_KEY`   | **Secreta.** service_role key, solo lado servidor.          |
 | `RESEND_API_KEY`              | API key de Resend.                                           |
 | `RESEND_FROM`                 | Remitente verificado, p. ej. `Fromus <recursos@fromus.tech>`. |
-| `UNSUBSCRIBE_SECRET`          | Secreto para firmar (HMAC) los enlaces de baja.             |
+| `UNSUBSCRIBE_SECRET`          | Secreto para firmar (HMAC) los enlaces de baja y la sesión del panel. |
+| `ADMIN_PASSWORD`              | Contraseña del panel privado `/admin` (ver y exportar leads). |
 
 Genera el secreto de baja con:
 
@@ -145,6 +147,21 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
      `consent_marketing = true`).
    - Llega el correo de entrega (revisa spam la primera vez).
    - El enlace **"Date de baja"** del correo marca `unsubscribed = true`.
+
+---
+
+## Panel de leads (`/admin`)
+
+Dónde recoges los correos sin tener que entrar a Supabase. Entra a
+`https://recursos.fromus.tech/admin`, ingresa la `ADMIN_PASSWORD` y verás:
+
+- Conteo total, por fuente (`rup` / `licitar`) y de contactos activos.
+- La lista completa de leads con correo, fuente, estado y fecha.
+- Botones para **descargar el CSV** (todos, solo RUP o solo Licitar) y subirlo
+  a tu herramienta de email marketing.
+
+El acceso queda en una cookie firmada (HMAC) que expira a los 7 días. La sesión
+se cierra con el botón "Cerrar sesión".
 
 ---
 
