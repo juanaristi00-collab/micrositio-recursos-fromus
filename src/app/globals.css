@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base text-beige font-body antialiased;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(232, 103, 46, 0.05), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  /* Numbers / KPIs siempre en monospace */
+  .num {
+    @apply font-mono tabular-nums;
+  }
+
+  ::selection {
+    background: rgba(232, 103, 46, 0.3);
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .container-tight {
+    @apply mx-auto w-full max-w-2xl px-5;
+  }
+
+  .container-prose {
+    @apply mx-auto w-full max-w-3xl px-5;
+  }
+
+  /* Botón CTA naranja — el único uso de relleno naranja permitido */
+  .btn-orange {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-orange px-6 py-3
+      font-semibold text-black transition-all duration-150
+      hover:brightness-110 focus:outline-none focus-visible:ring-2
+      focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-black
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-edge
+      bg-surface-raised px-5 py-2.5 text-sm font-medium text-beige transition-colors
+      duration-150 hover:border-orange focus:outline-none focus-visible:ring-2
+      focus-visible:ring-orange;
+  }
+
+  .card {
+    @apply rounded-lg border border-edge bg-surface-raised p-5 transition-colors
+      duration-150;
+  }
+
+  .input-mono {
+    @apply w-full rounded-md border border-edge bg-black px-4 py-3 font-mono text-sm
+      text-beige placeholder:text-beige/30 transition-colors duration-150
+      focus:border-orange focus:outline-none;
+  }
+
+  /* Prosa de las guías */
+  .prose-fromus {
+    @apply text-beige/85 leading-relaxed;
+  }
+  .prose-fromus h2 {
+    @apply mt-12 mb-4 font-display text-2xl text-beige sm:text-3xl;
+  }
+  .prose-fromus h3 {
+    @apply mt-9 mb-3 font-display text-lg text-orange sm:text-xl;
+  }
+  .prose-fromus p {
+    @apply my-4;
+  }
+  .prose-fromus ul {
+    @apply my-4 space-y-2 pl-5;
+  }
+  .prose-fromus ol {
+    @apply my-4 list-decimal space-y-2 pl-6 marker:font-mono marker:text-orange;
+  }
+  .prose-fromus ul > li {
+    @apply relative pl-4;
+  }
+  .prose-fromus ul > li::before {
+    content: "—";
+    @apply absolute left-0 text-orange;
+  }
+  .prose-fromus strong {
+    @apply font-semibold text-beige;
+  }
+  .prose-fromus a {
+    @apply text-orange underline decoration-orange/40 underline-offset-2 hover:decoration-orange;
+  }
+  .prose-fromus blockquote {
+    @apply my-6 border-l-2 border-orange/60 bg-surface-raised py-3 pl-4 pr-3 text-sm
+      text-beige/70;
+  }
+}

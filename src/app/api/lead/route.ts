@@ -1,0 +1,122 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getServiceSupabase } from "@/lib/supabase";
+import { sendEmail } from "@/lib/resend";
+import { buildDeliveryEmail } from "@/lib/emails";
+import { GUIDES, isSource } from "@/lib/content";
+import { unsubscribeUrl } from "@/lib/tokens";
+import { rateLimit, pruneRateLimit } from "@/lib/rateLimit";
+
+export const runtime = "nodejs";
+
+// Validación de email sobria pero efectiva.
+const EMAIL_RE =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+function getClientIp(req: NextRequest): string {
+  const fwd = req.headers.get("x-forwarded-for");
+  if (fwd) return fwd.split(",")[0]!.trim();
+  return req.headers.get("x-real-ip") ?? "unknown";
+}
+
+export async function POST(req: NextRequest) {
+  // 1. Rate-limit por IP
+  pruneRateLimit();
+  const ip = getClientIp(req);
+  const { allowed, retryAfter } = rateLimit(`lead:${ip}`);
+  if (!allowed) {
+    return NextResponse.json(
+      { ok: false, error: "Demasiados intentos. Espera un momento." },
+      { status: 429, headers: { "Retry-After": String(retryAfter) } },
+    );
+  }
+
+  // 2. Parseo y validación de entrada
+  let body: { email?: unknown; source?: unknown; consent?: unknown };
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: "Solicitud inválida." },
+      { status: 400 },
+    );
+  }
+
+  const email =
+    typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+  const source = body.source;
+  const consent = body.consent === true;
+
+  if (!EMAIL_RE.test(email) || email.length > 254) {
+    return NextResponse.json(
+      { ok: false, error: "Ingresa un correo válido." },
+      { status: 400 },
+    );
+  }
+  if (!isSource(source)) {
+    return NextResponse.json(
+      { ok: false, error: "Origen inválido." },
+      { status: 400 },
+    );
+  }
+  if (!consent) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Necesitamos tu consentimiento para enviarte la guía.",
+      },
+      { status: 400 },
+    );
+  }
+
+  const guide = GUIDES[source];
+
+  // 3. Upsert del lead (no duplicar por email+source). Si Supabase no está
+  //    configurado, no rompemos la experiencia: revelamos la guía igual.
+  let leadSaved = false;
+  try {
+    const supabase = getServiceSupabase();
+    const { error } = await supabase.from("leads").upsert(
+      {
+        email,
+        source,
+        consent_marketing: consent,
+        ip,
+      },
+      { onConflict: "email,source", ignoreDuplicates: false },
+    );
+    if (error) {
+      console.error("[lead] Supabase upsert error:", error.message);
+    } else {
+      leadSaved = true;
+    }
+  } catch (err) {
+    console.error(
+      "[lead] No se pudo guardar el lead:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // 4. Disparar el correo de entrega (no bloquea la revelación in-line)
+  let emailSent = false;
+  try {
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ?? new URL(req.url).origin;
+    const guideUrl = `${siteUrl}/${guide.slug}/guia`;
+    const unsubUrl = unsubscribeUrl(siteUrl, email, source);
+    const { subject, html, text } = buildDeliveryEmail(source, {
+      guideUrl,
+      unsubscribeUrl: unsubUrl,
+    });
+    const result = await sendEmail({ to: email, subject, html, text });
+    emailSent = result.ok;
+    if (!result.ok) console.error("[lead] Resend error:", result.error);
+  } catch (err) {
+    console.error(
+      "[lead] No se pudo enviar el correo:",
+      err instanceof Error ? err.message : err,
+    );
+  }
+
+  // La guía se revela siempre que la validación pasó (gratificación inmediata).
+  return NextResponse.json({ ok: true, leadSaved, emailSent });
+}
