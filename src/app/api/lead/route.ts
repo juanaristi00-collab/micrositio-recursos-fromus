@@ -107,25 +107,30 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 4. Disparar el correo de entrega (no bloquea la revelación in-line)
+  // 4. Correo de entrega — DESACTIVADO por defecto. El objetivo es solo
+  //    capturar el correo; el email marketing se hará aparte, después.
+  //    Para reactivar el envío transaccional, pon EMAIL_DELIVERY_ENABLED=true
+  //    (requiere RESEND_API_KEY y dominio verificado).
   let emailSent = false;
-  try {
-    const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL ?? new URL(req.url).origin;
-    const guideUrl = guideUnlockUrl(siteUrl, guide.slug, email, source);
-    const unsubUrl = unsubscribeUrl(siteUrl, email, source);
-    const { subject, html, text } = buildDeliveryEmail(source, {
-      guideUrl,
-      unsubscribeUrl: unsubUrl,
-    });
-    const result = await sendEmail({ to: email, subject, html, text });
-    emailSent = result.ok;
-    if (!result.ok) console.error("[lead] Resend error:", result.error);
-  } catch (err) {
-    console.error(
-      "[lead] No se pudo enviar el correo:",
-      err instanceof Error ? err.message : err,
-    );
+  if (process.env.EMAIL_DELIVERY_ENABLED === "true") {
+    try {
+      const siteUrl =
+        process.env.NEXT_PUBLIC_SITE_URL ?? new URL(req.url).origin;
+      const guideUrl = guideUnlockUrl(siteUrl, guide.slug, email, source);
+      const unsubUrl = unsubscribeUrl(siteUrl, email, source);
+      const { subject, html, text } = buildDeliveryEmail(source, {
+        guideUrl,
+        unsubscribeUrl: unsubUrl,
+      });
+      const result = await sendEmail({ to: email, subject, html, text });
+      emailSent = result.ok;
+      if (!result.ok) console.error("[lead] Resend error:", result.error);
+    } catch (err) {
+      console.error(
+        "[lead] No se pudo enviar el correo:",
+        err instanceof Error ? err.message : err,
+      );
+    }
   }
 
   // La guía se desbloquea siempre que la validación pasó: el cliente redirige

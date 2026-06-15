@@ -70,10 +70,16 @@ Todas están documentadas en [`.env.example`](./.env.example):
 | `NEXT_PUBLIC_SITE_URL`        | URL pública (sin slash final), p. ej. `https://recursos.fromus.tech`. Construye los enlaces de las guías y de baja. |
 | `SUPABASE_URL`                | URL del proyecto Supabase.                                   |
 | `SUPABASE_SERVICE_ROLE_KEY`   | **Secreta.** service_role key, solo lado servidor.          |
-| `RESEND_API_KEY`              | API key de Resend.                                           |
-| `RESEND_FROM`                 | Remitente verificado, p. ej. `Fromus <recursos@fromus.tech>`. |
 | `UNSUBSCRIBE_SECRET`          | Secreto para firmar (HMAC) los enlaces de baja y la sesión del panel. |
 | `ADMIN_PASSWORD`              | Contraseña del panel privado `/admin` (ver y exportar leads). |
+| `EMAIL_DELIVERY_ENABLED`      | _Opcional._ `false` por defecto: el sitio **no envía correo**, solo captura. Ponlo en `true` para reactivar el correo de entrega. |
+| `RESEND_API_KEY`              | _Opcional_ (solo si `EMAIL_DELIVERY_ENABLED=true`). API key de Resend. |
+| `RESEND_FROM`                 | _Opcional._ Remitente verificado, p. ej. `Fromus <recursos@fromus.tech>`. |
+
+> **Por ahora el envío de correo está apagado a propósito.** El sitio solo
+> guarda el correo en Supabase; el email marketing se hará por separado. Por eso
+> **no necesitas Resend para lanzar** — basta con Supabase. Cuando quieras
+> activar correos, pon `EMAIL_DELIVERY_ENABLED=true` y las dos variables de Resend.
 
 Genera el secreto de baja con:
 
