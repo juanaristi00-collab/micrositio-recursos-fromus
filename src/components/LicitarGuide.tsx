@@ -10,12 +10,14 @@ export function LicitarGuide() {
         Licitar con el Estado se rige por la Ley 80/1993 y la Ley 1150/2007 y se
         tramita en línea en <strong>SECOP II</strong>. Hay{" "}
         <strong>cinco modalidades</strong>: licitación pública, selección
-        abreviada (menor cuantía y subasta inversa), concurso de méritos, mínima
+        abreviada (menor cuantía, subasta inversa y otras causales), concurso de
+        méritos, mínima
         cuantía y contratación directa. El proveedor crea una cuenta gratuita en
         SECOP II, encuentra oportunidades, cumple los{" "}
         <strong>requisitos habilitantes</strong> y presenta la oferta con su{" "}
-        <strong>garantía de seriedad</strong> (mínimo{" "}
-        <span className="num">10%</span>). <strong>Regla de oro:</strong> lo que
+        <strong>garantía de seriedad</strong> (<span className="num">10%</span>{" "}
+        del presupuesto oficial, con topes en procesos grandes).{" "}
+        <strong>Regla de oro:</strong> lo que
         no da puntaje es subsanable;{" "}
         <strong>
           no entregar la garantía de seriedad con la oferta es insubsanable
@@ -48,9 +50,11 @@ export function LicitarGuide() {
         <li>Anexa documentos y finaliza.</li>
       </ol>
       <blockquote>
-        La ANCP-CCE aprueba el registro pero <strong>no verifica</strong> los
-        datos; no reemplazan los que cada entidad pida. Las compras por Acuerdo
-        Marco se hacen en la <strong>Tienda Virtual del Estado (TVEC)</strong>.
+        Al finalizar los pasos, la cuenta queda activa automáticamente: la
+        ANCP-CCE no emite aprobación ni valida los datos, que registras bajo tu
+        responsabilidad y no reemplazan los que pida cada entidad. Las compras
+        por Acuerdo Marco se hacen en la{" "}
+        <strong>Tienda Virtual del Estado (TVEC)</strong>.
       </blockquote>
 
       <h2>Modalidades y cuantías (art. 2 Ley 1150)</h2>
@@ -97,9 +101,12 @@ export function LicitarGuide() {
           menor cuantía. Típica en obra pública.
         </li>
         <li>
-          <strong>Selección abreviada:</strong> menor cuantía; o{" "}
+          <strong>Selección abreviada:</strong> menor cuantía;{" "}
           <strong>subasta inversa</strong> para bienes/servicios de
-          características técnicas uniformes (se compite bajando precio).
+          características técnicas uniformes (se compite bajando precio); y otras
+          causales del art. 2 núm. 2 de la Ley 1150 (servicios de salud, defensa
+          y seguridad nacional, licitación declarada desierta, enajenación de
+          bienes del Estado, entre otras).
         </li>
         <li>
           <strong>Concurso de méritos:</strong> consultoría e interventoría;
@@ -151,10 +158,9 @@ export function LicitarGuide() {
       <p>
         Los <strong>documentos tipo</strong> de Colombia Compra son{" "}
         <strong>obligatorios</strong> en obra pública de infraestructura de
-        transporte (Ley 2022/2020), agua y saneamiento, catastro, y en los de{" "}
-        <strong>Infraestructura Social</strong> —que agrupan educación, salud y
-        recreación/deporte, y se ampliaron a <strong>vivienda</strong> y obras
-        de carácter <strong>institucional</strong>—. Para esos, la entidad{" "}
+        transporte (Ley 2022/2020), agua potable y saneamiento básico, gestión
+        catastral e infraestructura social (educación, salud, cultura,
+        recreación y deporte). Para esos, la entidad{" "}
         <strong>no puede cambiar</strong> las condiciones habilitantes ni los
         factores de escogencia.
       </p>
@@ -171,12 +177,16 @@ export function LicitarGuide() {
         <strong>propuesta económica dentro del presupuesto oficial</strong>{" "}
         (superarlo = rechazo); anexos;{" "}
         <strong>garantía de seriedad</strong>. Todo se carga y firma en SECOP II
-        antes del cierre. La garantía de seriedad ≥{" "}
-        <strong>
-          <span className="num">10%</span>
-        </strong>{" "}
-        del valor, vigente desde la presentación hasta la aprobación de la
-        garantía de cumplimiento (art. 7 Ley 1150).
+        antes del cierre. La garantía de seriedad la reglamenta el Decreto
+        1082/2015: por regla general el <span className="num">10%</span> del
+        presupuesto oficial, con topes para procesos grandes (
+        <span className="num">2,5%</span> / <span className="num">1%</span> /{" "}
+        <span className="num">0,5%</span> cuando el valor supera{" "}
+        <span className="num">1.000.000</span> SMMLV). Su vigencia en pliegos
+        tipo es de <span className="num">3</span> meses desde el cierre, y entre
+        los riesgos que ampara está que el seleccionado no otorgue la garantía de
+        cumplimiento. La obligación de constituirla está en el art. 7 de la Ley
+        1150.
       </p>
 
       <h2>Subsanabilidad (art. 5 Ley 1150, mod. Ley 1882/2018)</h2>
@@ -185,8 +195,8 @@ export function LicitarGuide() {
         general hasta el traslado del informe de evaluación. Dos casos
         especiales: en <strong>subasta inversa</strong>, antes de que inicie el
         evento de subasta; en <strong>mínima cuantía</strong> (Decreto
-        1860/2021), hasta que finalice ese traslado —que aquí dura apenas{" "}
-        <span className="num">1</span> día hábil—.
+        1860/2021), hasta que finalice el traslado del informe, según el término
+        que fije la entidad en la invitación.
       </p>
       <p>
         <strong>NO subsanable:</strong> no entregar la garantía de seriedad con
@@ -220,14 +230,16 @@ export function LicitarGuide() {
         <li>Respuesta a observaciones e informe final.</li>
         <li>
           <strong>Audiencia pública de adjudicación</strong> (resolución
-          motivada, irrevocable).
+          motivada; irrevocable salvo las excepciones del art. 9 de la Ley 1150:
+          inhabilidad o incompatibilidad sobreviniente, o acto obtenido por
+          medios ilegales).
         </li>
         <li>Firma, garantías, registro presupuestal, acta de inicio.</li>
       </ol>
       <blockquote>
-        En obra pública, SECOP II usa <strong>dos sobres</strong>: el económico
-        permanece cerrado hasta la audiencia de adjudicación. Una licitación
-        completa suele tomar varios meses.
+        En obra pública la oferta económica se presenta en un sobre separado y
+        se evalúa de forma diferenciada de los requisitos habilitantes (Ley 80,
+        art. 30, parágrafo 3). Una licitación completa suele tomar varios meses.
       </blockquote>
 
       <h2>Errores que descalifican</h2>
@@ -249,11 +261,10 @@ export function LicitarGuide() {
       </ul>
       <blockquote>
         Matiz sobre el RUP: debe estar vigente y <strong>en firme</strong> al
-        cierre, pero la exigencia del <strong>código UNSPSC exacto</strong> se
-        ha flexibilizado: manuales y documentos tipo recientes permiten que la
-        entidad clasifique la experiencia aportada si el objeto del contrato
-        previo concuerda con lo solicitado, aunque no figure bajo el código
-        idéntico.
+        cierre. La experiencia se exige y clasifica hasta el{" "}
+        <strong>tercer nivel</strong> del Clasificador de Bienes y Servicios
+        (UNSPSC), lo que evita que las entidades impongan códigos
+        hiperespecíficos (Decreto 1082/2015).
       </blockquote>
 
       <h2>Los 5 puntos más accionables</h2>
@@ -285,18 +296,22 @@ export function LicitarGuide() {
         Consultadas el 14 de junio de 2026.
       </p>
       <ul>
-        <li>Modalidades — funcionpublica.gov.co; colombiacompra.gov.co</li>
+        <li>Modalidades — Ley 1150/2007 art. 2; Decreto 1082/2015; ANCP-CCE</li>
+        <li>Cuantías — Ley 1150/2007 art. 2 lit. b</li>
         <li>
-          Cuantías (art. 2 Ley 1150) — funcionpublica.gov.co; Concepto C-222 de
-          2026 ANCP-CCE
+          Registro SECOP II — Guía de registro de proveedores, ANCP-CCE
+          (colombiacompra.gov.co)
         </li>
-        <li>Registro SECOP II — colombiacompra.gov.co</li>
         <li>
-          Subsanabilidad/garantía — Conceptos C-426 de 2024, C-518 de 2025
-          ANCP-CCE
+          Subsanabilidad y garantía — Ley 1150/2007 art. 5; Concepto C-253 de
+          2023 ANCP-CCE
         </li>
-        <li>Licitación (art. 30 Ley 80) — sintesis.colombiacompra.gov.co</li>
-        <li>Documentos tipo — colombiacompra.gov.co</li>
+        <li>
+          Traslado del informe (5 días) — Ley 80/1993 art. 30; Concepto C-245 de
+          2023 ANCP-CCE
+        </li>
+        <li>Licitación — Ley 80/1993 art. 30</li>
+        <li>Documentos tipo — Ley 2022/2020; ANCP-CCE</li>
       </ul>
     </article>
   );
