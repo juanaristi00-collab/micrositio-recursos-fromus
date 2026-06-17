@@ -64,8 +64,10 @@ export function RupGuide() {
         <li>Decreto 019 de 2012, art. 221.</li>
         <li>Decreto 1082 de 2015 (arts. 2.2.1.1.1.5.x).</li>
         <li>
-          Decretos 399 y 579 de 2021, 1041 de 2022 (información financiera de
-          últimos 3 años; “mejor año fiscal”).
+          Información financiera: desde 2024 se evalúa el último año fiscal
+          reportado. La prórroga de los Decretos 399 y 579 de 2021 y 1041 de
+          2022, que permitía el mejor de los últimos 3 años, expiró el 31 de
+          diciembre de 2023.
         </li>
         <li>
           Decreto 1074 de 2015 (mod. Decreto 045 de 2024), art. 2.2.2.46.1.7
@@ -146,9 +148,10 @@ export function RupGuide() {
         financieros NIIF firmados; certificación de gastos de interés.
       </p>
       <blockquote>
-        Nota transitoria vigente: se reporta la información contable de los
-        últimos <strong>3 años fiscales</strong> (o desde el primer cierre si es
-        más nueva).
+        Información financiera: se reporta la del <strong>último año fiscal</strong>{" "}
+        (corte a 31 de diciembre del año anterior). La prórroga que permitía
+        acreditar el mejor de los últimos 3 años (Decretos 399 y 579 de 2021)
+        expiró el 31 de diciembre de 2023.
       </blockquote>
 
       <h2>Componentes del RUP</h2>
@@ -204,9 +207,10 @@ export function RupGuide() {
         cols={["Indicador", "Fórmula"]}
       />
       <blockquote>
-        Se reportan con 2 decimales. Las entidades evalúan el{" "}
-        <strong>“mejor año fiscal”</strong> global de los últimos 3 que figuren
-        en el RUP (Decreto 399/2021 y 579/2021).
+        Se reportan con 2 decimales. Desde 2024 las entidades evalúan el{" "}
+        <strong>último año fiscal</strong> reportado en el RUP; la regla
+        transitoria del “mejor de los últimos 3 años” (Decretos 399 y 579 de
+        2021) expiró el 31 de diciembre de 2023.
       </blockquote>
 
       <h2>Renovación anual</h2>
@@ -263,16 +267,15 @@ export function RupGuide() {
         </table>
       </div>
       <blockquote>
-        Algunas Cámaras anuncian la renovación como “gratuita”, lo que contradice
-        la tarifa nacional. <strong>Reverificar con la Cámara del domicilio del
-        cliente.</strong>
+        <strong>Reverificá la tarifa vigente con la Cámara de Comercio del
+        domicilio, que puede variar.</strong>
       </blockquote>
 
       <h2>Errores comunes</h2>
       <ul>
         <li>
           Incoherencia entre estados financieros, formulario RUES-Anexo 2 y
-          registro mercantil (la causa #1 de rechazo).
+          registro mercantil (causal de rechazo).
         </li>
         <li>
           Soportes de experiencia sin códigos UNSPSC, sin valor en SMMLV o sin
@@ -332,6 +335,10 @@ export function RupGuide() {
         </li>
         <li>Tarifas RUP 2026 — Confecámaras (Camado, CCB)</li>
         <li>Experiencia y UNSPSC — ccb.org.co; Concepto C-320 de 2025 ANCP-CCE</li>
+        <li>
+          Información financiera (último año fiscal, desde 2024) — Conceptos
+          C-029 de 2024 y C-102 de 2025 ANCP-CCE
+        </li>
       </ul>
     </article>
   );
