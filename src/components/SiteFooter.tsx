@@ -22,9 +22,9 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="container-tight pb-8 text-xs text-beige/30">
-        Fromus S.A.S. · NIT <span className="num">902074666-4</span> · Tratamiento
-        de datos conforme a la Ley <span className="num">1581</span> de{" "}
-        <span className="num">2012</span> (Habeas Data).
+        Fromus S.A.S. · Tratamiento de datos conforme a la Ley{" "}
+        <span className="num">1581</span> de <span className="num">2012</span>{" "}
+        (Habeas Data).
       </div>
     </footer>
   );

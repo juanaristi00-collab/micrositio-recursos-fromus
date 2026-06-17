@@ -29,10 +29,9 @@ export default function PrivacidadPage() {
         <article className="prose-fromus mt-10">
           <h2>1. Responsable del tratamiento</h2>
           <p>
-            <strong>Fromus S.A.S.</strong>, sociedad identificada con NIT{" "}
-            <span className="num">902074666-4</span>, es la responsable del
-            tratamiento de los datos personales recolectados a través de este
-            sitio. Canal de contacto para el ejercicio de derechos:{" "}
+            <strong>Fromus S.A.S.</strong> es la responsable del tratamiento de
+            los datos personales recolectados a través de este sitio. Canal de
+            contacto para el ejercicio de derechos:{" "}
             <a href="mailto:recursos@fromus.tech">recursos@fromus.tech</a>.
           </p>
 
