@@ -151,10 +151,12 @@ export function LicitarGuide() {
       <p>
         Los <strong>documentos tipo</strong> de Colombia Compra son{" "}
         <strong>obligatorios</strong> en obra pública de infraestructura de
-        transporte (Ley 2022/2020) y en otros sectores (agua y saneamiento,
-        infraestructura educativa, de salud, cultura/recreación/deporte,
-        catastro). Para esos, la entidad <strong>no puede cambiar</strong> las
-        condiciones habilitantes ni los factores de escogencia.
+        transporte (Ley 2022/2020), agua y saneamiento, catastro, y en los de{" "}
+        <strong>Infraestructura Social</strong> —que agrupan educación, salud y
+        recreación/deporte, y se ampliaron a <strong>vivienda</strong> y obras
+        de carácter <strong>institucional</strong>—. Para esos, la entidad{" "}
+        <strong>no puede cambiar</strong> las condiciones habilitantes ni los
+        factores de escogencia.
       </p>
       <p>
         <strong>Secciones clave:</strong> objeto y alcance; presupuesto oficial;
@@ -179,9 +181,12 @@ export function LicitarGuide() {
 
       <h2>Subsanabilidad (art. 5 Ley 1150, mod. Ley 1882/2018)</h2>
       <p>
-        <strong>Regla:</strong> lo que NO da puntaje es subsanable, hasta el
-        traslado del informe de evaluación (en mínima cuantía y subasta, antes de
-        su realización).
+        <strong>Regla:</strong> lo que NO da puntaje es subsanable, por regla
+        general hasta el traslado del informe de evaluación. Dos casos
+        especiales: en <strong>subasta inversa</strong>, antes de que inicie el
+        evento de subasta; en <strong>mínima cuantía</strong> (Decreto
+        1860/2021), hasta que finalice ese traslado —que aquí dura apenas{" "}
+        <span className="num">1</span> día hábil—.
       </p>
       <p>
         <strong>NO subsanable:</strong> no entregar la garantía de seriedad con
@@ -233,7 +238,8 @@ export function LicitarGuide() {
         </li>
         <li>Oferta económica que supera el presupuesto oficial.</li>
         <li>
-          RUP no vigente o sin los códigos/indicadores exigidos al cierre.
+          RUP no vigente o no en firme, o sin los indicadores exigidos al
+          cierre.
         </li>
         <li>
           Acreditar experiencia/condiciones ocurridas después del cierre.
@@ -241,6 +247,14 @@ export function LicitarGuide() {
         <li>No responder los requerimientos de subsanación a tiempo.</li>
         <li>Presentar la oferta fuera de la hora de cierre.</li>
       </ul>
+      <blockquote>
+        Matiz sobre el RUP: debe estar vigente y <strong>en firme</strong> al
+        cierre, pero la exigencia del <strong>código UNSPSC exacto</strong> se
+        ha flexibilizado: manuales y documentos tipo recientes permiten que la
+        entidad clasifique la experiencia aportada si el objeto del contrato
+        previo concuerda con lo solicitado, aunque no figure bajo el código
+        idéntico.
+      </blockquote>
 
       <h2>Los 5 puntos más accionables</h2>
       <ol>
