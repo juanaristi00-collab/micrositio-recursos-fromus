@@ -6,12 +6,24 @@
 create table if not exists public.leads (
   id                uuid        primary key default gen_random_uuid(),
   email             text        not null,
-  source            text        not null check (source in ('rup', 'licitar')),
+  source            text        not null check (source in ('rup', 'licitar', 'lista')),
   consent_marketing boolean     not null default false,
   unsubscribed      boolean     not null default false,
   created_at        timestamptz not null default now(),
   ip                text
 );
+
+-- ── Migración para bases ya existentes ─────────────────────────────────────
+-- `create table if not exists` NO actualiza el CHECK de una tabla que ya
+-- existe. Si la tabla ya estaba creada con ('rup','licitar'), ejecuta esto
+-- una vez para permitir también el origen 'lista' (página /lista):
+do $$
+begin
+  alter table public.leads drop constraint if exists leads_source_check;
+  alter table public.leads
+    add constraint leads_source_check
+    check (source in ('rup', 'licitar', 'lista'));
+end $$;
 
 -- Normalizar el correo a minúsculas a nivel de base de datos (defensa en
 -- profundidad: la API ya lo hace, pero esto lo garantiza siempre).

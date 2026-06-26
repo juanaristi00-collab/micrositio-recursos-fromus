@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServiceSupabase } from "@/lib/supabase";
 import { sendEmail } from "@/lib/resend";
 import { buildDeliveryEmail } from "@/lib/emails";
-import { GUIDES, isSource } from "@/lib/content";
+import { GUIDES, isLeadSource } from "@/lib/content";
 import {
   unsubscribeUrl,
   guideUnlockUrl,
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
       { status: 400 },
     );
   }
-  if (!isSource(source)) {
+  if (!isLeadSource(source)) {
     return NextResponse.json(
       { ok: false, error: "Origen inválido." },
       { status: 400 },
@@ -72,6 +72,31 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // 2b. Caso "lista": misma captura de correo que las guías (Supabase + consentimiento),
+  //     pero sin contenido que desbloquear. Guardamos el lead y devolvemos ok.
+  if (source === "lista") {
+    let listaLeadSaved = false;
+    try {
+      const supabase = getServiceSupabase();
+      const { error } = await supabase.from("leads").upsert(
+        { email, source, consent_marketing: consent, ip },
+        { onConflict: "email,source", ignoreDuplicates: false },
+      );
+      if (error) {
+        console.error("[lead] Supabase upsert error (lista):", error.message);
+      } else {
+        listaLeadSaved = true;
+      }
+    } catch (err) {
+      console.error(
+        "[lead] No se pudo guardar el lead (lista):",
+        err instanceof Error ? err.message : err,
+      );
+    }
+    return NextResponse.json({ ok: true, leadSaved: listaLeadSaved });
+  }
+
+  // A partir de aquí, source es una guía (rup | licitar).
   const guide = GUIDES[source];
 
   // Ruta de desbloqueo (relativa) que el cliente usará para abrir la guía con

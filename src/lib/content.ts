@@ -78,3 +78,15 @@ export const GUIDES: Record<Source, GuideConfig> = {
 export function isSource(value: unknown): value is Source {
   return value === "rup" || value === "licitar";
 }
+
+/**
+ * Orígenes válidos para un lead. Además de las guías (rup/licitar) existe
+ * "lista": la página /lista captura el correo igual que las guías, pero no
+ * desbloquea contenido (no hay guía detrás). Se mantiene separado de `Source`
+ * para no exigir una entrada en `GUIDES` que no aplica.
+ */
+export type LeadSource = Source | "lista";
+
+export function isLeadSource(value: unknown): value is LeadSource {
+  return isSource(value) || value === "lista";
+}

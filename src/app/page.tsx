@@ -59,6 +59,23 @@ export default function HomePage() {
           </Link>
         </div>
 
+        <Link
+          href="/lista"
+          className="card group mt-4 flex items-center justify-between gap-4 hover:border-orange"
+        >
+          <div>
+            <span className="font-mono text-xs text-beige/40">lista/ia</span>
+            <h2 className="mt-2 font-display text-xl text-beige">Lista IA</h2>
+            <p className="mt-2 text-sm text-beige/65">
+              Las herramientas de IA que sí usamos, por tarea y en tres niveles:
+              la que vuela, la que sirve y la que mejor dejás quieta.
+            </p>
+          </div>
+          <span className="shrink-0 text-sm text-orange group-hover:underline">
+            Ver la lista →
+          </span>
+        </Link>
+
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
             ["5", "indicadores RUP"],

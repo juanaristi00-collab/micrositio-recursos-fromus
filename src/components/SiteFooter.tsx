@@ -16,6 +16,9 @@ export function SiteFooter() {
           <Link href="/licitar" className="hover:text-orange">
             Licitar
           </Link>
+          <Link href="/lista" className="hover:text-orange">
+            Lista IA
+          </Link>
           <Link href="/privacidad" className="hover:text-orange">
             Privacidad
           </Link>

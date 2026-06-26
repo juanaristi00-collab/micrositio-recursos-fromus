@@ -7,18 +7,17 @@ import {
   TOOL_COUNT,
   type Category,
   type Tool,
+  type Tier,
 } from "@/lib/lista";
+import { ListaSignup } from "@/components/ListaSignup";
+
+const TIER_ORDER: Tier[] = ["EXCELENTE", "BUENA", "MALA"];
 
 /**
  * Página /lista — herramientas de IA por tarea en tres niveles.
  * Destino de un reel: identidad Fromus, reusa tokens y fuentes del sitio.
- *
- * TODO(links): no existe aún un archivo de constantes de enlaces en el repo.
- * Reemplazá la URL de Instagram por la real cuando esté disponible.
+ * El CTA y la captura de correo viven en <ListaSignup />.
  */
-const INSTAGRAM_URL = "https://instagram.com/fromus"; // TODO: confirmar handle real
-const FROMUS_URL = "https://fromus.tech"; // usado en el resto del micrositio
-
 export function ListaTools() {
   return (
     <section className="container-tight py-14 sm:py-20">
@@ -30,7 +29,7 @@ export function ListaTools() {
         ))}
       </div>
 
-      <CtaBlock />
+      <ListaSignup />
     </section>
   );
 }
@@ -39,22 +38,34 @@ function Hero() {
   return (
     <header className="motion-safe:animate-fade-in-up">
       <span className="font-mono text-xs text-orange">
-        <span className="text-beige/40">&gt;_ fromus</span> · la lista
+        <span className="text-beige/40">fromus@recursos</span>:~$ cat lista-ia
       </span>
 
-      <h1 className="mt-5 font-display text-4xl leading-[1.05] sm:text-6xl">
-        <span style={{ color: TIERS.EXCELENTE.color }}>EXCELENTE.</span>{" "}
-        <span style={{ color: TIERS.BUENA.color }}>BUENA.</span>{" "}
-        <span style={{ color: TIERS.MALA.color }}>MALA.</span>
+      <h1 className="mt-5 font-display text-3xl leading-tight text-beige sm:text-5xl">
+        Las herramientas de IA que{" "}
+        <span className="text-orange">de verdad usamos.</span>
       </h1>
 
       <p className="mt-5 max-w-xl text-base leading-relaxed text-beige/70 sm:text-lg">
-        Las herramientas de IA que de verdad usamos, ordenadas por tarea. Sin
-        ranking inflado: para cada cosa, la que vuela, la que sirve y la que
-        mejor dejás quieta.
+        Ordenadas por tarea, sin ranking inflado: para cada cosa, la que vuela,
+        la que sirve y la que mejor dejás quieta.
       </p>
 
-      <p className="num mt-6 text-xs tracking-wider text-beige/40">
+      {/* Leyenda de niveles — el color codifica, no decora */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-xs">
+        {TIER_ORDER.map((tier) => (
+          <span key={tier} className="inline-flex items-center gap-2">
+            <span
+              aria-hidden
+              className="h-2 w-2 rounded-full"
+              style={{ backgroundColor: TIERS[tier].color }}
+            />
+            <span style={{ color: TIERS[tier].color }}>{tier}</span>
+          </span>
+        ))}
+      </div>
+
+      <p className="num mt-5 text-xs tracking-wider text-beige/40">
         {TOOL_COUNT} HERRAMIENTAS · {CATEGORIES.length} CATEGORÍAS · 1 LISTA
       </p>
     </header>
@@ -199,42 +210,5 @@ function ToolLogo({ tool, color }: { tool: Tool; color: string }) {
         </span>
       )}
     </span>
-  );
-}
-
-function CtaBlock() {
-  return (
-    <footer className="mt-20 border-t border-edge pt-12 text-center sm:mt-24">
-      <h2 className="font-display text-2xl text-beige sm:text-3xl">
-        ¿Te sirvió la lista?
-      </h2>
-      <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-beige/60">
-        Subimos esto y mucho más sobre IA aplicada a tu empresa. Seguinos y
-        contale a tu equipo.
-      </p>
-
-      <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-orange"
-        >
-          Seguime en Instagram
-        </a>
-        <a
-          href={FROMUS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-ghost"
-        >
-          Conocé Fromus
-        </a>
-      </div>
-
-      <p className="mt-8 font-hand text-2xl text-orange">
-        — Miguel, cofundador de Fromus
-      </p>
-    </footer>
   );
 }

@@ -17,6 +17,9 @@ export function SiteHeader() {
           <Link href="/licitar" className="text-beige/70 hover:text-orange">
             Licitar
           </Link>
+          <Link href="/lista" className="text-beige/70 hover:text-orange">
+            Lista IA
+          </Link>
         </nav>
       </div>
     </header>
