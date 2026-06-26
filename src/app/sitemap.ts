@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/rup/guia",
     "/licitar",
     "/licitar/guia",
+    "/lista",
     "/privacidad",
   ];
   return routes.map((path) => ({
