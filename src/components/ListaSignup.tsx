@@ -7,11 +7,8 @@ import Link from "next/link";
  * Captura de correo para /lista. Sigue el mismo patrón que las guías
  * (POST /api/lead con consentimiento y nota de Habeas Data), pero con
  * source "lista": no desbloquea contenido, solo guarda el lead.
- *
- * TODO(links): no existe aún un archivo de constantes de enlaces en el repo.
- * Reemplazá la URL de Instagram por la real cuando esté disponible.
  */
-const INSTAGRAM_URL = "https://instagram.com/fromus"; // TODO: confirmar handle real
+const INSTAGRAM_URL = "https://www.instagram.com/fromuss__/";
 const FROMUS_URL = "https://fromus.tech"; // usado en el resto del micrositio
 
 type Status = "idle" | "loading" | "done" | "error";
